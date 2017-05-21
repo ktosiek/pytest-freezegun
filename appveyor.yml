@@ -6,6 +6,9 @@ environment:
     - PYTHON: "C:\\Python27"
       TOX_ENV: "py27"
 
+    - PYTHON: "C:\\Python27"
+      TOX_ENV: "py27-fg30"
+
     - PYTHON: "C:\\Python33"
       TOX_ENV: "py33"
 
