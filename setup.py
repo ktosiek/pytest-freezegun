@@ -23,7 +23,10 @@ setup(
     description='Wrap tests with fixtures in freeze_time',
     long_description=read('README.rst'),
     py_modules=['pytest_freezegun'],
-    install_requires=['pytest>=3.0.0'],
+    install_requires=[
+        'freezegun>0.3',
+        'pytest>=3.0.0',
+    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Pytest',
