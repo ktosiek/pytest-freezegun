@@ -16,6 +16,24 @@ def test_freezing_time(testdir):
     assert result.ret == 0
 
 
+def test_freezing_time_in_fixture(testdir):
+    testdir.makepyfile("""
+        import pytest
+        from datetime import date, datetime
+
+        @pytest.fixture
+        def today():
+            return datetime.now().date()
+
+        @pytest.mark.freeze_time('2017-05-20 15:42')
+        def test_sth(today):
+            assert today == date(2017, 5, 20)
+    """)
+
+    result = testdir.runpytest('-v', '-s')
+    assert result.ret == 0
+
+
 def test_no_mark(testdir):
     testdir.makepyfile("""
         import datetime
