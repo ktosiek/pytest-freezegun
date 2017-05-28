@@ -10,9 +10,18 @@ python:
   - "pypy"
 
 install:
-  - pip install tox
+  # coveralls-python needs a newer setuptools to install from git
+  - "[[ $TRAVIS_PYTHON_VERSION == pypy ]] || pip install --upgrade setuptools pip"
+  # Using the coveralls-python master until parallel builds support is released
+  # See: https://github.com/coveralls-clients/coveralls-python/commit/7ba3a5
+  - "[[ $TRAVIS_PYTHON_VERSION == pypy ]] || pip install git+https://github.com/coveralls-clients/coveralls-python"
+  - pip install tox coverage
   - "TOX_ENV=${TRAVIS_PYTHON_VERSION/[0-9].[0-9]/py${TRAVIS_PYTHON_VERSION/.}}"
-script: tox -e $TOX_ENV
+script:
+  - tox -e $TOX_ENV
+  - coverage combine
+after_success:
+  - "[[ $TRAVIS_PYTHON_VERSION == pypy ]] || COVERALLS_PARALLEL=true coveralls"
 
 before_cache:
   - rm -rf $HOME/.cache/pip/log
