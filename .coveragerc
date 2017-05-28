@@ -1,0 +1,6 @@
+[paths]
+source = pytest_freezegun
+
+[run]
+branch = true
+source = pytest_freezegun

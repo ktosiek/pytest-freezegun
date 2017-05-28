@@ -52,8 +52,10 @@ All the features can be seen in this example:
 
 Contributing
 ------------
-Contributions are very welcome. Tests can be run with `tox`_, please ensure
-the coverage at least stays the same before you submit a pull request.
+Contributions are very welcome.
+Tests can be run with `tox`_.
+You can later check coverage with `coverage combine && coverage html`.
+Please try to keep coverage at least the same before you submit a pull request.
 
 License
 -------
