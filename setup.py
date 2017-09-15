@@ -46,7 +46,7 @@ setup(
     ],
     entry_points={
         'pytest11': [
-            'freezegun = pytest_freezegun',
+            'freezegun = pytest_freezegun:plugin',
         ],
     },
 )
