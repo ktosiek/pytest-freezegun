@@ -50,6 +50,12 @@ All the features can be seen in this example:
         freezer.move_to('2017-05-21')
         assert current_date == date(2017, 5, 21)
 
+    def test_not_using_marker(freezer):
+        now = datetime.now()
+        time.sleep(1)
+        later = datetime.now()
+        assert now == later
+
 Contributing
 ------------
 Contributions are very welcome.
