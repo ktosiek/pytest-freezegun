@@ -20,7 +20,7 @@ class FreezegunPlugin(object):
 
     @pytest.hookimpl(tryfirst=True)
     def pytest_runtest_setup(self, item):
-        marker = item.get_marker('freeze_time')
+        marker = item.get_closest_marker('freeze_time')
 
         if marker:
             ignore = marker.kwargs.pop('ignore', [])
