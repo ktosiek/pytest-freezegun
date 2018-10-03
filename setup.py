@@ -25,7 +25,7 @@ setup(
     py_modules=['pytest_freezegun'],
     install_requires=[
         'freezegun>0.3',
-        'pytest>=3.6.0',
+        'pytest>=3.0.0',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
