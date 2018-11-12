@@ -81,7 +81,7 @@ def test_durations(testdir):
             assert True
     """)
 
-    result = testdir.runpytest('-v', '-s', '--durations=3')
+    result = testdir.runpytest('-vv', '-s', '--durations=3')
 
     # We don't have access to the actual terminalreporter,
     # so the only way to collect duration times is
