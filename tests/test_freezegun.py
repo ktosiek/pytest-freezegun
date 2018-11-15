@@ -103,10 +103,11 @@ def test_durations(testdir):
         durations[match.group(2)] = float(match.group(1))
 
     # It should take a non-negative amount of time for each of the steps,
-    # but it also should never take longer than a second
-    assert 0 <= durations['setup'] <= 1
-    assert 0 <= durations['call'] <= 1
-    assert 0 <= durations['teardown'] <= 1
+    # but it also should never take longer than a second.
+    # If no time is reported, assume that it's zero.
+    assert 0 <= durations.get('setup', 0) <= 1
+    assert 0 <= durations.get('call', 0) <= 1
+    assert 0 <= durations.get('teardown', 0) <= 1
 
 
 def test_fixture_no_mark(testdir):
