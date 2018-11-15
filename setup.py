@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-freezegun',
-    version='0.2.0',
+    version='0.3.0',
     author='Tomasz Kontusz',
     author_email='tomasz.kontusz@gmail.com',
     maintainer='Tomasz Kontusz',
