@@ -6,7 +6,7 @@ pytest-freezegun
     :target: https://travis-ci.org/ktosiek/pytest-freezegun
     :alt: See Build Status on Travis CI
 
-.. image:: https://ci.appveyor.com/api/projects/status/github/ktosiek/pytest-freezegun?branch=master
+.. image:: https://ci.appveyor.com/api/projects/status/github/ktosiek/pytest-freezegun?branch=master&svg=true
     :target: https://ci.appveyor.com/project/ktosiek/pytest-freezegun/branch/master
     :alt: See Build Status on AppVeyor
 
