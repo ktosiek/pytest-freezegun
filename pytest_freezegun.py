@@ -43,5 +43,11 @@ class FreezegunPlugin(object):
             self.freezer = None
             self.frozen_time = None
 
+    def pytest_configure(self, config):
+        config.addinivalue_line(
+            "markers",
+            "freeze_time(timestamp): freeze time to timestamp for the duration of the test.",
+        )
+
 
 plugin = FreezegunPlugin()
