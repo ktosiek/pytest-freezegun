@@ -43,5 +43,10 @@ class FreezegunPlugin(object):
             self.freezer = None
             self.frozen_time = None
 
+    def pytest_load_initial_conftests(self, early_config):
+        early_config.addinivalue_line(
+            "markers", "freeze_time: Freeze time using freezegun.",
+        )
+
 
 plugin = FreezegunPlugin()
