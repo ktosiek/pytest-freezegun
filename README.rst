@@ -2,6 +2,10 @@
 pytest-freezegun
 ================
 
+
+.. image:: https://img.shields.io/pypi/v/pytest-freezegun.svg
+    :target: https://pypi.python.org/pypi/pytest-freezegun/
+
 .. image:: https://travis-ci.org/ktosiek/pytest-freezegun.svg?branch=master
     :target: https://travis-ci.org/ktosiek/pytest-freezegun
     :alt: See Build Status on Travis CI
