@@ -124,3 +124,57 @@ def test_fixture_no_mark(testdir):
 
     result = testdir.runpytest('-v', '-s')
     assert result.ret == 0
+
+
+def test_class_freezing_time(testdir):
+    testdir.makepyfile("""
+        import pytest
+        from datetime import date, datetime
+
+        class TestAsClass(object):
+
+            @pytest.mark.freeze_time('2017-05-20 15:42')
+            def test_sth(self):
+                assert datetime.now().date() == date(2017, 5, 20)
+    """)
+
+    result = testdir.runpytest('-v', '-s')
+    assert result.ret == 0
+
+
+def test_class_move_to(testdir):
+    testdir.makepyfile("""
+        from datetime import date
+        import pytest
+
+        class TestAsClass(object):
+
+            @pytest.mark.freeze_time
+            def test_changing_date(self, freezer):
+                freezer.move_to('2017-05-20')
+                assert date.today() == date(2017, 5, 20)
+                freezer.move_to('2017-05-21')
+                assert date.today() == date(2017, 5, 21)
+    """)
+
+    result = testdir.runpytest('-v', '-s')
+    assert result.ret == 0
+
+
+def test_class_just_fixture(testdir):
+    testdir.makepyfile("""
+        from datetime import datetime
+        import time
+
+        class TestAsClass(object):
+
+            def test_just_fixture(self, freezer):
+                now = datetime.now()
+                time.sleep(0.1)
+                later = datetime.now()
+
+                assert now == later
+    """)
+
+    result = testdir.runpytest('-v', '-s')
+    assert result.ret == 0
