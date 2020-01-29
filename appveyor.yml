@@ -12,6 +12,9 @@ environment:
     - PYTHON: "C:\\Python36"
       TOX_ENV: "py36-pt4"
 
+    - PYTHON: "C:\\Python38"
+      TOX_ENV: "py38-pt5"
+
 init:
   - "%PYTHON%/python -V"
   - "%PYTHON%/python -c \"import struct;print( 8 * struct.calcsize(\'P\'))\""

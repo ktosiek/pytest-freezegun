@@ -6,10 +6,12 @@ python:
   - "3.5"
   - "3.6"
   - "3.7"
+  - "3.8"
   - "pypy"
 env:
 - TOX_SUFFIX=pt3
 - TOX_SUFFIX=pt4
+- TOX_SUFFIX=pt5
 
 install:
   # coveralls-python needs a newer setuptools to install from git
