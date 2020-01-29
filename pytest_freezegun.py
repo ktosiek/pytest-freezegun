@@ -37,7 +37,8 @@ def freezer_fixture(request):
         kwargs = marker.kwargs
 
     # Always want to ignore _pytest
-    ignore.append('_pytest')
+    ignore.append('_pytest.terminal')
+    ignore.append('_pytest.runner')
 
     # Freeze time around the test
     freezer = freeze_time(*args, ignore=ignore, **kwargs)
