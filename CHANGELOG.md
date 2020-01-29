@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for class-based tests
 - Mark is registered
+- Tests for Python 3.7
+
+### Removed
+- Support for Python before 3.5 (including 2.7)
 
 
 ## [0.3.0] - 2018-11-15
