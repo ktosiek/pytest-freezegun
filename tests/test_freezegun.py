@@ -65,7 +65,51 @@ def test_move_to(testdir):
     assert result.ret == 0
 
 
-def test_durations(testdir):
+def test_fixture_durations(testdir):
+    """
+    In an older version, the time would be frozen for the pytest itself too.
+    That caused it to report weird durations for test runs,
+    namely very large numbers for setup and very large
+    NEGATIVE numbers for teardown.
+    """
+    testdir.makepyfile("""
+        import pytest
+        from datetime import date, datetime
+
+        def test_truth(freezer):
+            freezer.move_to('2000-01-01')
+            assert True
+    """)
+
+    result = testdir.runpytest('-vv', '-s', '--durations=3')
+
+    # We don't have access to the actual terminalreporter,
+    # so the only way to collect duration times is
+    # to parse the pytest output.
+    DURATION_REGEX = re.compile(r'''
+        (-?\d+\.\d+)s          # Time in seconds
+        \s+                    # Whitespace
+        (call|setup|teardown)  # Test phase
+        \s+                    # Whitespace
+        test_fixture_durations.py::test_truth  # Test ID
+    ''', re.X)
+
+    durations = {}
+    for line in result.outlines:
+        match = DURATION_REGEX.match(line)
+        if match is None:
+            continue
+
+        durations[match.group(2)] = float(match.group(1))
+
+    # It should take a non-negative amount of time for each of the steps,
+    # but it also should never take longer than a second
+    assert 0 <= durations['setup'] <= 1
+    assert 0 <= durations['call'] <= 1
+    assert 0 <= durations['teardown'] <= 1
+
+
+def test_marker_durations(testdir):
     """
     In an older version, the time would be frozen for the pytest itself too.
     That caused it to report weird durations for test runs,
@@ -91,7 +135,7 @@ def test_durations(testdir):
         \s+                    # Whitespace
         (call|setup|teardown)  # Test phase
         \s+                    # Whitespace
-        test_durations.py::test_truth  # Test ID
+        test_marker_durations.py::test_truth  # Test ID
     ''', re.X)
 
     durations = {}
@@ -118,6 +162,40 @@ def test_fixture_no_mark(testdir):
             now = datetime.now()
             time.sleep(0.1)
             later = datetime.now()
+
+            assert now == later
+    """)
+
+    result = testdir.runpytest('-v', '-s')
+    assert result.ret == 0
+
+
+def test_fixture_freezes_time(testdir):
+    testdir.makepyfile("""
+        import time
+
+        def test_fixture_freezes_time(freezer):
+            now = time.time()
+            time.sleep(0.1)
+            later = time.time()
+
+            assert now == later
+    """)
+
+    result = testdir.runpytest('-v', '-s')
+    assert result.ret == 0
+
+
+def test_marker_freezes_time(testdir):
+    testdir.makepyfile("""
+        import pytest
+        import time
+
+        @pytest.mark.freeze_time('2000-01-01')
+        def test_marker_freezes_time(freezer):
+            now = time.time()
+            time.sleep(0.1)
+            later = time.time()
 
             assert now == later
     """)
