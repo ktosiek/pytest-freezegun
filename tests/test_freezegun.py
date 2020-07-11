@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 import re
 
-from datetime import datetime
+import pytest
+from pytest_freezegun import _get_pytest_version
 
 
 def test_freezing_time(testdir):
@@ -256,3 +258,8 @@ def test_class_just_fixture(testdir):
 
     result = testdir.runpytest('-v', '-s')
     assert result.ret == 0
+
+
+def test_parse_pytest_release_candidate_version_string(monkeypatch):
+    monkeypatch.setattr(pytest, "__version__", "6.0.0rc1", raising=True)
+    assert _get_pytest_version() == (6, 0, 0)

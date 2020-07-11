@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from packaging import version
 import pytest
 
 from freezegun import freeze_time
 
 
-PYTEST_VERSION = tuple(int(part) for part in pytest.__version__.split('.'))
+def _get_pytest_version():
+    v = version.parse(pytest.__version__)
+    return tuple(int(part) for part in v.base_version.split('.'))
+
+
+PYTEST_VERSION = _get_pytest_version()
 MARKER_NAME = 'freeze_time'
 FIXTURE_NAME = 'freezer'
 
