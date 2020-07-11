@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
 build/
 develop-eggs/
 dist/
@@ -72,3 +73,8 @@ target/
 # pyenv
 .python-version
 
+# direnv
+.envrc
+
+# VSCode
+.vscode
