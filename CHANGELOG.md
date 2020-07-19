@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.4.0] - 2020-02-02
+## [0.4.2] - 2020-07-19
+### Fixed
+- Work with pre-release pytest versions, by [chandlernine](https://github.com/chandlernine), with a different implementation proposed by [Aly Sivji](https://github.com/alysivji).
+- Marking a test with `freeze_time` should freeze time in fixtures, even if the `freezer` fixture is also used explicitly late in the fixture list. Thanks to [Christian Grossmüller](https://github.com/chgad) for pointing out the problem.
+
+## [0.4.1] - 2020-02-02
 ### Added
 - Support for class-based tests, by [Richard Terry](https://github.com/radiac).
 - Registering the `freeze_time` mark, thanks to [Dima Tisnek](https://github.com/dimaqq), [Craig Anderson](https://github.com/craiga) and [Richard Terry](https://github.com/radiac). This was in really high demand. 
