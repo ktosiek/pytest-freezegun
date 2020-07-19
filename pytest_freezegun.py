@@ -2,10 +2,10 @@
 
 import pytest
 
+from distutils.version import LooseVersion
 from freezegun import freeze_time
 
 
-PYTEST_VERSION = tuple(int(part) for part in pytest.__version__.split('.'))
 MARKER_NAME = 'freeze_time'
 FIXTURE_NAME = 'freezer'
 
@@ -14,7 +14,7 @@ def get_closest_marker(node, name):
     """
     Get our marker, regardless of pytest version
     """
-    if PYTEST_VERSION < (3, 6, 0):
+    if LooseVersion(pytest.__version__) < LooseVersion('3.6.0'):
         return node.get_marker('freeze_time')
     else:
         return node.get_closest_marker('freeze_time')
