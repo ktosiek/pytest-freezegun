@@ -13,6 +13,12 @@ env:
 - TOX_SUFFIX=pt4
 - TOX_SUFFIX=pt5
 
+jobs:
+  include:
+    - env: TOX_SUFFIX=py38-ptNext-fgNext
+  allow_failures:
+    - env: TOX_SUFFIX=py38-ptNext-fgNext
+
 install:
   # coveralls-python needs a newer setuptools to install from git
   - "[[ $TRAVIS_PYTHON_VERSION == pypy3 ]] || pip install --upgrade setuptools pip"
