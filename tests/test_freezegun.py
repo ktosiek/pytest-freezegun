@@ -36,8 +36,8 @@ def test_freezing_time_in_fixture(testdir):
     assert result.ret == 0
 
 
-def test_freezing_time_in_a_fixture_with_mark_and_fixture_used_by_test(testdir):
-    # This is the situation from https://github.com/ktosiek/pytest-freezegun/issues/24
+def test_freezing_time_with_mark_and_fixture_used_by_test(testdir):
+    # https://github.com/ktosiek/pytest-freezegun/issues/24
     testdir.makepyfile("""
         import pytest
         from datetime import date, datetime
