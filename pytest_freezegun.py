@@ -52,10 +52,7 @@ def pytest_collection_modifyitems(items):
     Inject our fixture into any tests with our marker
     """
     for item in items:
-        if (
-            get_closest_marker(item, MARKER_NAME)
-            and FIXTURE_NAME not in item.fixturenames
-        ):
+        if get_closest_marker(item, MARKER_NAME):
             item.fixturenames.insert(0, FIXTURE_NAME)
 
 

@@ -36,6 +36,25 @@ def test_freezing_time_in_fixture(testdir):
     assert result.ret == 0
 
 
+def test_freezing_time_in_a_fixture_with_mark_and_fixture_used_by_test(testdir):
+    # This is the situation from https://github.com/ktosiek/pytest-freezegun/issues/24
+    testdir.makepyfile("""
+        import pytest
+        from datetime import date, datetime
+
+        @pytest.fixture
+        def today():
+            return datetime.now().date()
+
+        @pytest.mark.freeze_time('2017-05-20 15:42')
+        def test_sth(today, freezer):
+            assert today == date(2017, 5, 20)
+    """)
+
+    result = testdir.runpytest('-v', '-s')
+    assert result.ret == 0
+
+
 def test_no_mark(testdir):
     testdir.makepyfile("""
         import datetime
