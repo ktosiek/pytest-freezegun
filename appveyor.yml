@@ -1,19 +1,32 @@
 # What Python version is installed where:
 # http://www.appveyor.com/docs/installed-software#python
+image: Visual Studio 2019
 
 environment:
   matrix:
-    - PYTHON: "C:\\Python35"
-      TOX_ENV: "py35-pt4"
-
     - PYTHON: "C:\\Python36"
       TOX_ENV: "py36-pt3"
 
     - PYTHON: "C:\\Python36"
       TOX_ENV: "py36-pt4"
 
+    - PYTHON: "C:\\Python37"
+      TOX_ENV: "py37-pt5"
+
+    - PYTHON: "C:\\Python37"
+      TOX_ENV: "py37-pt6"
+
     - PYTHON: "C:\\Python38"
       TOX_ENV: "py38-pt5"
+
+    - PYTHON: "C:\\Python38"
+      TOX_ENV: "py38-pt6"
+
+    - PYTHON: "C:\\Python39"
+      TOX_ENV: "py39-pt5"
+
+    - PYTHON: "C:\\Python39"
+      TOX_ENV: "py39-pt6"
 
 init:
   - "%PYTHON%/python -V"
