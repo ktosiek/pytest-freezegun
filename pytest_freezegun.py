@@ -8,16 +8,6 @@ MARKER_NAME = 'freeze_time'
 FIXTURE_NAME = 'freezer'
 
 
-def get_closest_marker(node, name):
-    """
-    Get our marker, regardless of pytest version
-    """
-    if LooseVersion(pytest.__version__) < LooseVersion('3.6.0'):
-        return node.get_marker('freeze_time')
-    else:
-        return node.get_closest_marker('freeze_time')
-
-
 @pytest.fixture(name=FIXTURE_NAME)
 def freezer_fixture(request):
     """
@@ -28,7 +18,7 @@ def freezer_fixture(request):
     ignore = []
 
     # If we've got a marker, use the arguments provided there
-    marker = get_closest_marker(request.node, MARKER_NAME)
+    marker = request.node.get_closest_marker('freeze_time')
     if marker:
         ignore = marker.kwargs.pop('ignore', [])
         args = marker.args
@@ -50,7 +40,7 @@ def pytest_collection_modifyitems(items):
     Inject our fixture into any tests with our marker
     """
     for item in items:
-        if get_closest_marker(item, MARKER_NAME):
+        if item.get_closest_marker('freeze_time'):
             item.fixturenames.insert(0, FIXTURE_NAME)
 
 
