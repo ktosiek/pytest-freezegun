@@ -1,6 +1,5 @@
 import pytest
 
-from distutils.version import LooseVersion
 from freezegun import freeze_time
 
 
