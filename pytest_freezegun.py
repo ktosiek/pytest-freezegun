@@ -31,6 +31,9 @@ def freezer_fixture(request):
     # Freeze time around the test
     freezer = freeze_time(*args, ignore=ignore, **kwargs)
     frozen_time = freezer.start()
+    # NOTE(ilya): Give us access to the underlying freezer object and the standard set of freezegun
+    # API methods.
+    frozen_time.obj = freezer
     yield frozen_time
     freezer.stop()
 
