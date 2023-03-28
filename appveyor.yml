@@ -3,15 +3,6 @@
 
 environment:
   matrix:
-    - PYTHON: "C:\\Python35"
-      TOX_ENV: "py35-pt4"
-
-    - PYTHON: "C:\\Python36"
-      TOX_ENV: "py36-pt3"
-
-    - PYTHON: "C:\\Python36"
-      TOX_ENV: "py36-pt4"
-
     - PYTHON: "C:\\Python38"
       TOX_ENV: "py38-pt5"
 
