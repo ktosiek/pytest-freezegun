@@ -6,18 +6,18 @@ from distutils.version import LooseVersion
 from freezegun import freeze_time
 
 
-MARKER_NAME = 'freeze_time'
-FIXTURE_NAME = 'freezer'
+MARKER_NAME = "freeze_time"
+FIXTURE_NAME = "freezer"
 
 
 def get_closest_marker(node, name):
     """
     Get our marker, regardless of pytest version
     """
-    if LooseVersion(pytest.__version__) < LooseVersion('3.6.0'):
-        return node.get_marker('freeze_time')
+    if LooseVersion(pytest.__version__) < LooseVersion("3.6.0"):
+        return node.get_marker("freeze_time")
     else:
-        return node.get_closest_marker('freeze_time')
+        return node.get_closest_marker("freeze_time")
 
 
 @pytest.fixture(name=FIXTURE_NAME)
@@ -32,13 +32,13 @@ def freezer_fixture(request):
     # If we've got a marker, use the arguments provided there
     marker = get_closest_marker(request.node, MARKER_NAME)
     if marker:
-        ignore = marker.kwargs.pop('ignore', [])
+        ignore = marker.kwargs.pop("ignore", [])
         args = marker.args
         kwargs = marker.kwargs
 
     # Always want to ignore _pytest
-    ignore.append('_pytest.terminal')
-    ignore.append('_pytest.runner')
+    ignore.append("_pytest.terminal")
+    ignore.append("_pytest.runner")
 
     # Freeze time around the test
     freezer = freeze_time(*args, ignore=ignore, **kwargs)
