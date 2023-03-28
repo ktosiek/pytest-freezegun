@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
 from distutils.version import LooseVersion
+
 from freezegun import freeze_time
+import pytest
 
 
 MARKER_NAME = "freeze_time"
