@@ -12,9 +12,7 @@ FIXTURE_NAME = "freezer"
 
 @pytest.fixture(name=FIXTURE_NAME)
 def freezer_fixture(request):
-    """
-    Freeze time and make it available to the test
-    """
+    """Freeze time and make it available to the test."""
     args = []
     kwargs = {}
     ignore = []
@@ -38,18 +36,14 @@ def freezer_fixture(request):
 
 
 def pytest_collection_modifyitems(items):
-    """
-    Inject our fixture into any tests with our marker
-    """
+    """Inject our fixture into any tests with our marker."""
     for item in items:
         if item.get_closest_marker("freeze_time"):
             item.fixturenames.insert(0, FIXTURE_NAME)
 
 
 def pytest_configure(config):
-    """
-    Register our marker
-    """
+    """Register our marker."""
     config.addinivalue_line(
         "markers", "{}(...): use freezegun to freeze time".format(MARKER_NAME)
     )
